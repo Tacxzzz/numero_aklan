@@ -76,6 +76,7 @@ export function GameBoard({ onTileClick, lengthChoice = 25,lengthStart = 0, scor
           gameId !== "2" &&
           gameId !== "3" &&
           gameId !== "4" &&
+          gameId !== "25" &&
           gameId !== "26" 
         ) {
           isDisabled = distinctScores.includes(tile.value);
