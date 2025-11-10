@@ -13,6 +13,7 @@ import BetMotoLogo from "@/files/AklanLogo.png";
 import { PhoneIcon, LockIcon, PhoneCallIcon, LucidePhone, Phone, LockKeyholeIcon, EyeOffIcon, EyeIcon } from "lucide-react"; 
 import { FiLock, FiPhone } from 'react-icons/fi';
 import AdvertisementModal from '@/components/AdvertisementModal';
+import { goToBet88 } from '@/lib/goToBet88';
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export function LoginPage() {
   const [forgotPass, setForgotPass] = useState(false);
   const [openOTPforgot, setOpenOTPforgot] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [showWarningModal, setWarningModal] = useState(false);
+  const [showWarningModal, setWarningModal] = useState(true);
 
   const { deviceID, userID } = useUser();
 
@@ -84,8 +85,8 @@ export function LoginPage() {
     formData.append("deviceID", deviceID)
     const data = await loginAccount(formData);
     if(!data.authenticated){
-      setWarningModal(true);
       setIsLoading(false);
+      goToBet88();
       return;
     }
 

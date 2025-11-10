@@ -52,6 +52,7 @@ import ScatterCover from '../files/bet88_cover.jpg';
 import PisoGameViewCard from '@/components/PisoGameViewCard';
 import QRCodeComponent from '@/components/QRCodeComponent';
 import termsPDF from "../files/terms.pdf"
+import { goToBet88 } from '@/lib/goToBet88';
 
 // Tawk.to configuration
 const TAWK_SRC = "https://embed.tawk.to/68bf392d5085a11923cdfa94/1j4lfen9h";
@@ -450,7 +451,7 @@ const removePlayer = () => {
 
 const handleLogoClick = () => {
   onLogout();
-  window.location.href = "https://bet88.ph";
+  goToBet88();
 };
 
 const handleClientsClick = async () => {

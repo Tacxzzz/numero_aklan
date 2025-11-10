@@ -5,6 +5,8 @@ import { ClientProvider } from "./pages/ClientContext";
 import AddToHomeScreen from "./components/AddToHomeScreen";
 import { PlayerCashinTotal } from "./pages/PlayerCashinTotal";
 import { PlayerCashoutTotal } from "./pages/PlayerCashoutTotal";
+import { useEffect, useState } from 'react';
+import { goToBet88 } from './lib/goToBet88';
 
 // Correct lazy imports: 
 const LoginPage = lazy(() => import("./pages/LoginPage").then(module => ({ default: module.LoginPage })));
@@ -55,6 +57,39 @@ const RedirectIfAuthenticated = ({ children }: { children: JSX.Element }) => {
 };
 
 function App() {
+  const [redirected, setRedirected] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('redirectedToBet88') === 'true') {
+      setRedirected(true);
+    }
+  }, []);
+
+  if (redirected) {
+    // Show locked screen instead of your app routes
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen text-center gap-4">
+        <div className="flex gap-4 mt-4">
+          <button
+            className="px-4 py-2 bg-blue-600 text-white rounded"
+            onClick={() => goToBet88()}
+          >
+            Go to Bet88
+          </button>
+          <button
+            className="px-4 py-2 bg-gray-600 text-white rounded"
+            onClick={() => {
+              sessionStorage.removeItem('redirectedToBet88'); // Clear the session flag
+              window.location.reload(); // Refresh the app so user can access it again
+            }}
+          >
+            Refresh
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <UserProvider>
       <ClientProvider>
